@@ -39,3 +39,5 @@ async function getData(URL){
 getData(URL);
 
 // support screen reader and seo
+
+// dont use o something

@@ -2,6 +2,7 @@
 // cd 
 // npm install
 // npm run dev
+// 
 // get Lavian basketball data
 //show latvian basketball data
 
@@ -19,7 +20,7 @@ Aaron.then((result) => {
 })
 
 //REST API
-const URL = "https://api.quotable.io/random";
+const URL = "https://serpapi.com/search.json?hl=en&gl=us&google_domain=google.com";
 
 async function getData(URL){
     try {
@@ -30,7 +31,7 @@ async function getData(URL){
         console.log(response)
         const data = await response.json         //
         console.log(data)//
-        document.querySelector("h1").textContent= data.content
+        document.querySelector("h1").textContent= data.title
         document.querySelector("h2").textContent = data.author
     } catch (error) {
         document.querySelector("h1").textContent = error;

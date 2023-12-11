@@ -6,14 +6,16 @@ import "aos/dist/aos.css";
 
 AOS.init(); // npm install aos --save
 
-const URL = "https://api.spoonacular.com/food/ingredients/9266/information?amount=1?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef&includeNutrition=true"
-// https://spoonacular.com/food-api/docs#Authentication
+const URL = "https://api.spoonacular.com/recipes/716429/information?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef&includeNutrition=true"
 
 async function getData(URL) {
     try{
         const response = await fetch(URL);
         const data = await response.json();
         console.log(data);
+        data.forEach(card => {
+            
+        });
 
     }
     catch (error) {

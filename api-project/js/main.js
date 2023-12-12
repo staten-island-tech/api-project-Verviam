@@ -6,8 +6,10 @@ import "aos/dist/aos.css";
 
 AOS.init(); // npm install aos --save
 
-const URL = "https://api.spoonacular.com/recipes/716429/information?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef&includeNutrition=true"
 
+const URL = "https://api.spoonacular.com/food/ingredients/9266/information?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef&includeNutrition=true"
+// search?query=
+// https://www.youtube.com/watch?v=V20Mj4w-7K4
 async function getData(URL) {
     try{
         const response = await fetch(URL);

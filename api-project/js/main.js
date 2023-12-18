@@ -7,7 +7,10 @@ import "aos/dist/aos.css";
 AOS.init(); // npm install aos --save
 
 
-const URL = "https://api.spoonacular.com/food/ingredients/9266/information?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef&includeNutrition=true"
+const URL = "https://api.spoonacular.com/recipes/complexSearch?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef" // add &query=__&cuisine=__
+
+// https://api.spoonacular.com/recipes/idOfrecipe/information?apiKey=       // get ingredient info based on recipe
+// findByingredients search
 // search?query=
 // https://www.youtube.com/watch?v=V20Mj4w-7K4
 async function getData(URL) {

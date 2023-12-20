@@ -30,6 +30,26 @@ async function getData(URL) {
 
 getData(URL)
 
+
+// let promise = new Promise(function (resolve, reject) {
+//     const x = "geeksforgeeks";
+//     const y = "geeksforgeeks"
+//     if (x === y) {
+//         resolve();
+//     } else {
+//         reject();
+//     }
+// });
+ 
+// promise.
+//     then(function () {
+//         console.log('Success, You are a GEEK');
+//     }).
+//     catch(function () {
+//         console.log('Some error has occurred');
+//     });
+
+
 // https://medium.com/@luisprooc/free-awesome-apis-for-your-next-projects-9a31345cb114
 // https://rapidapi.com/guides/ten-api-projects
 // https://apilist.fun/api/google-custom-search-api

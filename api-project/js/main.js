@@ -7,7 +7,9 @@ import "aos/dist/aos.css";
 AOS.init(); // npm install aos --save
 
 
-const URL = "https://api.spoonacular.com/recipes/complexSearch?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef" // add &query=__&cuisine=__
+const URL = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar,&number=2?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef" // add &query=__&cuisine=__
+// https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
+
 
 // https://api.spoonacular.com/recipes/idOfrecipe/information?apiKey=       // get ingredient info based on recipe
 // findByingredients search
@@ -54,8 +56,10 @@ getData(URL)
 // https://rapidapi.com/guides/ten-api-projects
 // https://apilist.fun/api/google-custom-search-api
 
-// search up keywords and get websites related to keyword
-// filter by criteria
+// take ingredient inputs from user and list down and search recipes that .includes the ingredients 
+// https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2
+
+
 // get pic of website home page for each card div
 // food recipe builder (have stats of certain foods and recipes, have another api for pics for final recipe)
 // maybe too lazy to cook option and then find restaurants with those specific foods in their menus (https://rapidapi.com/ptwebsolution/api/restaurants222/details)

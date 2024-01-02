@@ -21,8 +21,9 @@ async function getData(URL) {
             DOMSelectors.ingredientCard.insertAdjacentHTML("beforeend", 
             `<div class = "card" data-aos="fade-right">
             <div class ="card-head" data-aos="flip-up">${result.name}</div>
-            <img src = ${result.image} class = "card-img"/>
-            `) //make button to add to a diff list by taking result.name and inserting somewhere
+            <img src = {https://spoonacular.com/cdn/ingredients_100x100/ + ${result.image}} class = "card-img"/>
+            `) // https://spoonacular.com/food-api/docs#Show-Images
+            //make button to add to a diff list by taking result.name and inserting somewhere
 
         })
         
@@ -42,7 +43,7 @@ getData(URL)
 
 // take ingredients of food and allow users to search and click to add to list of ingredients html text and sort based on searching and have card divs for ingreds
 // with ingredients, add find recipes button that finds recipes that includes ingredients and make cards for it
-
+// add filters
 
 // "https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar,&number=2?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef" // add &query=__&cuisine=__
 // https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients

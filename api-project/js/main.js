@@ -16,14 +16,17 @@ async function getData(URL) {
         const response = await fetch(URL);
         const data = await response.json();
         const results = data.results
-    
+
         results.forEach(result => {
             DOMSelectors.ingredientCard.insertAdjacentHTML("beforeend", 
             `<div class = "card" data-aos="fade-right">
             <div class ="card-head" data-aos="flip-up">${result.name}</div>
-            <img src = {https://spoonacular.com/cdn/ingredients_100x100/ + ${result.image}} class = "card-img"/>
+            <img src = {"https://spoonacular.com/cdn/ingredients_100x100/" + ${result.image}} class = "card-img" alt="Picture of ${result.name}"/>
+            <button type="submit" class="add-button" id="addIngred">Add To Current Ingredients</button> 
             `) // https://spoonacular.com/food-api/docs#Show-Images
             //make button to add to a diff list by taking result.name and inserting somewhere
+            //make button for more information about ingredient or recipe
+            //add alternative text for images + support screen readers
 
         })
         

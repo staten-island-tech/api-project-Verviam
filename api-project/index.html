@@ -7,24 +7,15 @@
 <body>
   <body class="light">
     <h1 class="heading">Recipe Finder</h1>
-    <!--edit here-->
+
       <div class="selection-buttons">
 
         <button type="submit" class="theme-button" id="changeTheme">Change Theme</button>
 
-        <div class="equipment-filter" id="workoutsButton">
-          <label class="button-label">Sort By: </label>
-          <button type="submit" class="equipment-button" id="Everything">Everything</button>
-          <button type="submit" class="equipment-button" id="Dumbbells">Dumbbell</button>
-          <button type="submit" class="equipment-button" id="BodyWeight">BodyWeight</button>
-        </div>
-
-        <div class="difficulty-filter">
-          <label class="button-label">Sort By: </label>
-          <button type="submit" class="difficulty-button" id="easy-difficulty">Easy</button>
-          <button type="submit" class="difficulty-button" id="moderate-difficulty">Moderate</button>
-          <button type="submit" class="difficulty-button" id="hard-difficulty">Hard</button>
-        </div>
+        <form id= "user-input">
+          <input type="text" name="search" placeholder="Search Ingredient">
+          <input type="submit" value="Search">
+        </form>
 
       </div>
 

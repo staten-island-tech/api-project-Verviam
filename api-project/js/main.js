@@ -7,7 +7,8 @@ import "aos/dist/aos.css";
 AOS.init(); // npm install aos --save
 
 
-const URL = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar,&number=2?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef" // add &query=__&cuisine=__
+const URL = "https://api.spoonacular.com/food/ingredients/search?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef&query=apple"
+// "https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar,&number=2?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef" // add &query=__&cuisine=__
 // https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
 
 
@@ -19,53 +20,44 @@ async function getData(URL) {
     try{
         const response = await fetch(URL);
         const data = await response.json();
-        console.log(data);
-        data.forEach(card => {
-            
+        const results = data.results
+        results.forEach(ingredient => {
+            console.log(ingredient.name)
         });
+
+        DOMException.ingredientCard.insertAdjacentHTML()
 
     }
     catch (error) {
-        console.log("error")
+        console.log(error)
     }
 }
 
 getData(URL)
 
+function createIngredCard(){
+    // for each ingredient result from search
+    DOMSelectors.ingredientCard.insertAdjacentHTML()
+}
 
-// let promise = new Promise(function (resolve, reject) {
-//     const x = "geeksforgeeks";
-//     const y = "geeksforgeeks"
-//     if (x === y) {
-//         resolve();
-//     } else {
-//         reject();
-//     }
-// });
- 
-// promise.
-//     then(function () {
-//         console.log('Success, You are a GEEK');
-//     }).
-//     catch(function () {
-//         console.log('Some error has occurred');
+// function greet(name){
+//     const greetPromise = new Promise(function(resolve, reject){
+//         resolve(`Hello ${name}`)
 //     });
+//     return greetPromise
+// }
+// const randomName = greet("randNam");
 
-
-// https://medium.com/@luisprooc/free-awesome-apis-for-your-next-projects-9a31345cb114
-// https://rapidapi.com/guides/ten-api-projects
-// https://apilist.fun/api/google-custom-search-api
+// randomName.then((result)=>{
+//     console.log(result)
+// })
 
 // take ingredient inputs from user and list down and search recipes that .includes the ingredients 
 // https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2
 
 
-// get pic of website home page for each card div
-// food recipe builder (have stats of certain foods and recipes, have another api for pics for final recipe)
-// maybe too lazy to cook option and then find restaurants with those specific foods in their menus (https://rapidapi.com/ptwebsolution/api/restaurants222/details)
-// combine with weather api or local restaurants api
-
-// random dad jokes just for viewer attention span https://apilist.fun/api/icanhazdadjoke
+// take ingredients of food and allow users to search and click to add to list of ingredients html text and sort based on searching and have card divs for ingreds
+// with ingredients, add find recipes button that finds recipes that includes ingredients and make cards for it
 
 //v2/pokemon?limit=151 (gets first 151 pokemons)
 // &offset=151 (gets pokemone after 151)

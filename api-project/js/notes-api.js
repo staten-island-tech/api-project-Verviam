@@ -42,3 +42,16 @@ getData(URL);
 // support screen reader and seo
 
 // dont use o something
+
+// function greet(name){
+//     const greetPromise = new Promise(function(resolve, reject){
+//         resolve(`Hello ${name}`)
+//     });
+//     return greetPromise
+// }
+// const randomName = greet("randNam");
+
+// randomName.then((result)=>{
+//     console.log(result)
+// })
+

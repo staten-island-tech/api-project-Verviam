@@ -39,10 +39,11 @@ async function getData(URL) {
     }
 }
 
-function clickSearchIngred(){
-    let URL = URL.replace("query=", DOMSelectors.ingredientSearched.value)
-    //add html to index.html and then remove here
-}
+DOMSelectors.ingredientSearched.addEventListener("submit", function() {
+    // console.log(DOMSelectors.ingredientSearched.value)
+    const newURL = URL.replace("query=", `query= + ${DOMSelectors.ingredientSearched.value}`) 
+    getData(newURL)
+}) //remove html text
 
 function clickAddToIngredients(){
     DOMSelectors.currentIngredients.insertAdjacentElement("afterend", 

@@ -1,5 +1,6 @@
 const DOMSelectors = {
     ingredientSearched: document.getElementById("user-input"),
+    submitButton: document.getElementById("submit-button"),
     ingredientCard: document.querySelector(".cards"),
     currentIngredients: document.querySelector(".ingredients-text"),
     addedIngredients: document.querySelectorAll(".add-button")

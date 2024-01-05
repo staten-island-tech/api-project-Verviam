@@ -39,11 +39,17 @@ async function getData(URL) {
     }
 }
 
-DOMSelectors.ingredientSearched.addEventListener("submit", function() {
-    // console.log(DOMSelectors.ingredientSearched.value)
+DOMSelectors.submitButton.addEventListener("submit", function() {
+    event.preventDefault();
+    console.log(DOMSelectors.ingredientSearched.value)
     const newURL = URL.replace("query=", `query= + ${DOMSelectors.ingredientSearched.value}`) 
     getData(newURL)
 }) //remove html text
+async function search(event){
+    event.preventDefault()
+    const searchValue = DOMSelectors.ingredientSearched.value();
+
+}
 
 function clickAddToIngredients(){
     DOMSelectors.currentIngredients.insertAdjacentElement("afterend", 

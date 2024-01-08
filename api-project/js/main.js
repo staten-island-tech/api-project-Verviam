@@ -11,43 +11,44 @@ AOS.init(); // npm install aos --save
 const URL = "https://api.spoonacular.com/food/ingredients/search?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef&query=apple"
 
 
-async function getData(link) {
+async function getData(url) {
     try {
-        const response = await fetch(link);
-
+        const response = await fetch(url);
         if (response.status < 200 || response.status > 299) {
             throw new Error(response.statusText);
         } else {
             const data = await response.json();
             const results = data.results
-            results.forEach(result => {
-                DOMSelectors.ingredientCard.insertAdjacentHTML("beforeend",
-                    `<div class = "card" data-aos="fade-right">
-                <div class ="card-head" data-aos="flip-up">${result.name}</div>
-                <img src = {"https://spoonacular.com/cdn/ingredients_100x100/" + ${result.image}} class = "card-img" alt="Picture of ${result.name}"/>
-                <button type="submit" class="add-button" id="addIngred">Add To Current Ingredients</button> 
-                `)
-            })
-            const addedIngredients = document.querySelectorAll(".add-button")
-            addedIngredients.forEach(addedIngredient => {
-                addedIngredient.addEventListener("click", clickAddToIngredients)
-            })
-            // function for adding to current ingredients
-            function clickAddToIngredients() {
-                DOMSelectors.currentIngredients.innerHTML = ""
-                results.forEach(result=> {
-                    const ingredList = []
-                    ingredList.push(result.name)
-                    console.log(ingredList)
-                })
-                DOMSelectors.currentIngredients.insertAdjacentHTML("afterend", )
-            }
+            createCard(results)
         }
     }
     catch (error) {
         console.log(error)
     }
 }
+
+function createCard(results) {
+    results.forEach(result => {
+        DOMSelectors.ingredientCard.insertAdjacentHTML("beforeend",
+        `<div class = "card" data-aos="fade-right">
+        <div class ="card-head" data-aos="flip-up">${result.name}</div>
+        <img src = {"https://spoonacular.com/cdn/ingredients_100x100/" + ${result.image}} class = "card-img" alt="Picture of ${result.name}"/>
+        <button type="submit" class="add-button" id="addIngred">Add To Current Ingredients</button> 
+        `)
+    })
+    const addedIngredients = document.querySelectorAll(".add-button")
+    addedIngredients.forEach(addedIngredient => {
+        addedIngredient.addEventListener("click", clickAddToIngredients)
+    })
+
+    // function for adding to current ingredients
+    function clickAddToIngredients() {
+        const ingredientName = document.querySelector(".card-head").textContent; //edit
+        DOMSelectors.currentIngredients.innerHTML = ""
+        DOMSelectors.currentIngredients.insertAdjacentHTML("afterend", ingredientName)
+    }
+}
+
 // function for searching ingredient
 function searchIngredient(event) {
     event.preventDefault();
@@ -65,10 +66,12 @@ DOMSelectors.submitButton.addEventListener("click", searchIngredient);
 
 function clickSearchRecipes() {
     const recipeURL = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef&ingredients="
-    const newRecipeURL = recipeURL.replace("ingredients=", `ingredients= + ${currentIngredients}put currentingredients into array and display`) 
+    const newRecipeURL = recipeURL.replace("ingredients=", `ingredients= + ${ingredientName}`)
     getData(newRecipeURL)
 }
 DOMSelectors.recipeSearched.addEventListener("click", clickSearchRecipes)
+
+
 
 function clickChangeTheme() {
 

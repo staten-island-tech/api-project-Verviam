@@ -67,7 +67,12 @@ function clickSearchRecipes() {
 }
 DOMSelectors.recipeSearched.addEventListener("click", clickSearchRecipes)
 
-
+// clears ingredient list
+function clearButton(){
+    DOMSelectors.currentIngredients.innerHTML = ""
+    DOMSelectors.currentIngredients.innerHTML = "(Selected Ingredients will go here)"
+}
+DOMSelectors.clearIngredients.addEventListener("click", clearButton)
 
 function clickChangeTheme() {
 

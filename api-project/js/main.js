@@ -28,30 +28,36 @@ async function getData(link) {
                 <button type="submit" class="add-button" id="addIngred">Add To Current Ingredients</button> 
                 `)
             })
+            const addedIngredients = document.querySelectorAll(".add-button")
+            addedIngredients.forEach(addedIngredient => {
+                addedIngredient.addEventListener("click", clickAddToIngredients)
+            })
+            // function for adding to current ingredients
+            function clickAddToIngredients() {
+                DOMSelectors.currentIngredients.innerHTML = ""
+                results.forEach(result=> {
+                    const ingredList = []
+                    ingredList.push(result.name)
+                    console.log(ingredList)
+                })
+                DOMSelectors.currentIngredients.insertAdjacentHTML("afterend", )
+            }
         }
     }
     catch (error) {
         console.log(error)
     }
 }
-
+// function for searching ingredient
 function searchIngredient(event) {
     event.preventDefault();
     const searchValue = DOMSelectors.ingredientSearched.value;
     DOMSelectors.ingredientCard.innerHTML = ""
     const newURL = URL.replace("query=apple", `query= + ${searchValue}`)
     getData(newURL)
-
 }
 DOMSelectors.submitButton.addEventListener("click", searchIngredient);
 
-function clickAddToIngredients() {
-    DOMSelectors.currentIngredients.innerHTML = ""
-    DOMSelectors.currentIngredients.insertAdjacentHTML("afterend", result.name)
-}
-const addedIngredients = document.querySelectorAll(".add-button")
-addedIngredients.addEventListener("click", clickAddToIngredients)
-// code is in insertadjacenthtml so can't find??!!??!?!?!?!
 
 // https://spoonacular.com/food-api/docs#Show-Images
 //make button for more information about ingredient or recipe

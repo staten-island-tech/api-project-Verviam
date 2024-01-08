@@ -32,7 +32,7 @@ function createCard(results) {
         DOMSelectors.ingredientCard.insertAdjacentHTML("beforeend",
         `<div class = "card" data-aos="fade-right">
         <div class ="card-head" data-aos="flip-up">${result.name}</div>
-        <img src = {"https://spoonacular.com/cdn/ingredients_100x100/" + ${result.image}} class = "card-img" alt="Picture of ${result.name}"/>
+        <img src = "https://spoonacular.com/cdn/ingredients_250x250/${result.image}" class = "card-img" alt="Picture of ${result.name}"/>
         <button type="submit" class="add-button" id="addIngred">Add To Current Ingredients</button> 
         `)
     })
@@ -43,7 +43,7 @@ function createCard(results) {
 
     // function for adding to current ingredients
     function clickAddToIngredients() {
-        const ingredientName = document.querySelector(".card-head").textContent; //edit
+        const ingredientName = document.querySelector(".card-head").textContent; //only gets the textcontent of first
         DOMSelectors.currentIngredients.innerHTML = ""
         DOMSelectors.currentIngredients.insertAdjacentHTML("afterend", ingredientName)
     }
@@ -59,11 +59,7 @@ function searchIngredient(event) {
 }
 DOMSelectors.submitButton.addEventListener("click", searchIngredient);
 
-
-// https://spoonacular.com/food-api/docs#Show-Images
-//make button for more information about ingredient or recipe
-//add alternative text for images + support screen readers + seo
-
+// search for recipes based on ingredient list 
 function clickSearchRecipes() {
     const recipeURL = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef&ingredients="
     const newRecipeURL = recipeURL.replace("ingredients=", `ingredients= + ${ingredientName}`)
@@ -79,9 +75,10 @@ function clickChangeTheme() {
 
 getData(URL)
 // recipe card: "https://api.spoonacular.com/recipes/{id}/card"
+// add food jokes
+// add button for more information
 
-
-// make image show
+// support screen readers and seo
 // make button in ingredientcard results to add to list of ingredients for user
 // take ingredient inputs from user and list down and search recipes that .includes the ingredients
 // https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2
@@ -94,7 +91,3 @@ getData(URL)
 
 
 // https://api.spoonacular.com/recipes/idOfrecipe/information?apiKey=
-// findByingredients search
-// search?query=
-// https://www.youtube.com/watch?v=V20Mj4w-7K4
-

@@ -8,7 +8,7 @@ import "aos/dist/aos.css";
 AOS.init(); // npm install aos --save
 
 
-const URL = "https://api.spoonacular.com/food/ingredients/search?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef&query=apple"
+const URL = "https://api.spoonacular.com/food/ingredients/search?apiKey=489a1ecfaf764abdbc2e562b8f0b538a&query=apple"
 
 
 async function getData(url) {
@@ -36,16 +36,17 @@ function createCard(results) {
         <button type="submit" class="add-button" id="addIngred">Add To Current Ingredients</button> 
         `)
     })
+
     const addedIngredients = document.querySelectorAll(".add-button")
     addedIngredients.forEach(addedIngredient => {
         addedIngredient.addEventListener("click", clickAddToIngredients)
     })
-
     // function for adding to current ingredients
     function clickAddToIngredients() {
-        const ingredientName = document.querySelector(".card-head").textContent; //only gets the textcontent of first
-        DOMSelectors.currentIngredients.innerHTML = ""
-        DOMSelectors.currentIngredients.insertAdjacentHTML("afterend", ingredientName)
+        const card = this.parentElement //returns parent element where the specific button was located
+        const ingredientName = card.querySelector(".card-head")
+        const ingredientNameText = ingredientName.textContent
+        DOMSelectors.currentIngredients.insertAdjacentHTML("beforeend", `<br> - ${ingredientNameText}`)
     }
 }
 
@@ -61,8 +62,12 @@ DOMSelectors.submitButton.addEventListener("click", searchIngredient);
 
 // search for recipes based on ingredient list 
 function clickSearchRecipes() {
-    const recipeURL = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef&ingredients="
-    const newRecipeURL = recipeURL.replace("ingredients=", `ingredients= + ${ingredientName}`)
+    const recipeURL = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=489a1ecfaf764abdbc2e562b8f0b538a&ingredients="
+    ingredientNameText.forEach(text => {
+       const ingredientsToSearch = []
+       ingredientsToSearch.push(text)
+    });
+    const newRecipeURL = recipeURL.replace("ingredients=", `ingredients= + ${ingredientsToSearch[0]},+`)
     getData(newRecipeURL)
 }
 DOMSelectors.recipeSearched.addEventListener("click", clickSearchRecipes)
@@ -70,9 +75,10 @@ DOMSelectors.recipeSearched.addEventListener("click", clickSearchRecipes)
 // clears ingredient list
 function clearButton(){
     DOMSelectors.currentIngredients.innerHTML = ""
-    DOMSelectors.currentIngredients.innerHTML = "(Selected Ingredients will go here)"
+    DOMSelectors.currentIngredients.innerHTML = "Ingredients Cleared" + ' ' + "(Press Add to Current Ingredients to Add More)"
 }
 DOMSelectors.clearIngredients.addEventListener("click", clearButton)
+
 
 function clickChangeTheme() {
 
@@ -91,7 +97,7 @@ getData(URL)
 
 // add filters
 
-// "https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar,&number=2?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef" // add &query=__&cuisine=__
+// "https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar,&number=2?apiKey=489a1ecfaf764abdbc2e562b8f0b538a" // add &query=__&cuisine=__
 // https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
 
 

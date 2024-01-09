@@ -27,10 +27,12 @@ async function getData(url) {
     }
 }
 
+const ingredientArr = []
+
 function createCard(results) {
     results.forEach(result => {
         DOMSelectors.ingredientCard.insertAdjacentHTML("beforeend",
-        `<div class = "card" data-aos="fade-right">
+            `<div class = "card" data-aos="fade-right">
         <div class ="card-head" data-aos="flip-up">${result.name}</div>
         <img src = "https://spoonacular.com/cdn/ingredients_250x250/${result.image}" class = "card-img" alt="Picture of ${result.name}"/>
         <button type="submit" class="add-button" id="addIngred">Add To Current Ingredients</button> 
@@ -41,12 +43,13 @@ function createCard(results) {
     addedIngredients.forEach(addedIngredient => {
         addedIngredient.addEventListener("click", clickAddToIngredients)
     })
-    // function for adding to current ingredients
+    // function for adding to ingredient list
     function clickAddToIngredients() {
         const card = this.parentElement //returns parent element where the specific button was located
         const ingredientName = card.querySelector(".card-head")
         const ingredientNameText = ingredientName.textContent
         DOMSelectors.currentIngredients.insertAdjacentHTML("beforeend", `<br> - ${ingredientNameText}`)
+        ingredientArr.push(ingredientNameText)
     }
 }
 
@@ -61,21 +64,22 @@ function searchIngredient(event) {
 DOMSelectors.submitButton.addEventListener("click", searchIngredient);
 
 // search for recipes based on ingredient list 
-function clickSearchRecipes() {
+function searchRecipes() {
     const recipeURL = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=489a1ecfaf764abdbc2e562b8f0b538a&ingredients="
-    ingredientNameText.forEach(text => {
-       const ingredientsToSearch = []
-       ingredientsToSearch.push(text)
-    });
-    const newRecipeURL = recipeURL.replace("ingredients=", `ingredients= + ${ingredientsToSearch[0]},+`)
-    getData(newRecipeURL)
+    for (let i=0; i<ingredientArr.length; i++){
+        if ((i = 0)) {
+            recipeURL.concat(ingredientArr[i]);
+          } else {
+            recipeURL.concat(",+" + ingredientArr[i]);
+          }
+    }
+    getData(recipeURL) //make new getData for recipes
 }
-DOMSelectors.recipeSearched.addEventListener("click", clickSearchRecipes)
+DOMSelectors.recipeSearched.addEventListener("click", searchRecipes)
 
 // clears ingredient list
-function clearButton(){
+function clearButton() {
     DOMSelectors.currentIngredients.innerHTML = ""
-    DOMSelectors.currentIngredients.innerHTML = "Ingredients Cleared" + ' ' + "(Press Add to Current Ingredients to Add More)"
 }
 DOMSelectors.clearIngredients.addEventListener("click", clearButton)
 
@@ -85,20 +89,16 @@ function clickChangeTheme() {
 }
 
 getData(URL)
-// recipe card: "https://api.spoonacular.com/recipes/{id}/card"
 // add food jokes
 // add button for more information
 
 // support screen readers and seo
-// make button in ingredientcard results to add to list of ingredients for user
-// take ingredient inputs from user and list down and search recipes that .includes the ingredients
-// https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2
-// https://spoonacular.com/food-api/docs#Get-Recipe-Card
-
 // add filters
+// make look better (change function and variable names, event listeners on top)
 
-// "https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar,&number=2?apiKey=489a1ecfaf764abdbc2e562b8f0b538a" // add &query=__&cuisine=__
+// "https://api.spoonacular.com/recipes/findByIngredients?apiKey=489a1ecfaf764abdbc2e562b8f0b538a&ingredients=apples,+flour,+sugar," + add max number 
 // https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
-
+// https://spoonacular.com/food-api/docs#Get-Recipe-Card
+// recipe card: "https://api.spoonacular.com/recipes/{id}/card"
 
 // https://api.spoonacular.com/recipes/idOfrecipe/information?apiKey=

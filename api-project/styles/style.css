@@ -1,18 +1,56 @@
+@import url(themes.css);
+@import url(cards.css);
+
+html, *, body{
+    margin: 0 auto;
+    padding: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    font-size: 62.5%; 
+}
+
 .heading{
-
+    font-size: 4rem;
+    text-align: center;
+    margin: 0.5em;
 }
+
 .top-page{
-
-}
-
-.card{
-
+    display: flex;
+    justify-content: space-between;
+    font-size: 3rem;
 }
 
 .selected-ingredients{
     border: 2px solid black;
 }
 
-.body-text{
-    
+.get-recipe-card{
+    font-size: 1.5rem;
+    font-weight: bold;
 }
+
+
+@media screen and (max-width: 1080px) {
+    .card {
+      width: 25%;
+    }
+  }
+  
+  @media screen and (max-width: 800px) {
+    .card {
+      width: 40%;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .card {
+      width: 60%;
+    }
+  }
+  
+  @media screen and (max-width: 400px) {
+    .card {
+      width: 100%;
+    }
+  }

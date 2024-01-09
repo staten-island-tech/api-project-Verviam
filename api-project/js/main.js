@@ -7,7 +7,7 @@ import "aos/dist/aos.css";
 AOS.init(); // npm install aos --save
 
 const URL =
-  "https://api.spoonacular.com/food/ingredients/search?apiKey=6ac7239892874905bedcf1b815040b69&query=apple";
+  "https://api.spoonacular.com/food/ingredients/search?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef&query=apple";
 const ingredientArr = [];
 
 // get data for ingredients and making variables for ingredient info
@@ -79,7 +79,7 @@ function createCardR(data) {
         <div class ="card-head" data-aos="flip-up">${recipe.title}</div>
         <div class ="card-id" data-aos="flip-up">${recipe.id}</div>
         <img src = "${recipe.image}" class = "card-img" alt="Picture of ${recipe.title}"/>
-        <button type="submit" class="get-recipe-card" id="getRecipeCard">Click for Recipe Card</button> 
+        <button type="submit" class="get-recipe-card" id="getRecipeCard">Click for Recipe Card (click url after redirect)</button> 
         `
     ); 
   })
@@ -92,7 +92,7 @@ function openRecipeCard(){
   const card = this.parentElement
   const cardIDdiv = card.querySelector(".card-id")
   const cardID = cardIDdiv.textContent;
-  const recipeCardURL = `https://api.spoonacular.com/recipes/${cardID}/card?apiKey=6ac7239892874905bedcf1b815040b69`
+  const recipeCardURL = `https://api.spoonacular.com/recipes/${cardID}/card?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef`
   window.open(recipeCardURL, '_blank')
 } 
 
@@ -109,7 +109,7 @@ function searchIngredient(event) {
 
 // function for searching for recipes based on ingredient list 
 function searchRecipes() {
-  const apiKey = "6ac7239892874905bedcf1b815040b69";
+  const apiKey = "f9fb379cedb74dcbb6c758ac6a3c7cef";
   const baseURL = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=";
   const query = "&ingredients=";
   let recipeURL = baseURL + apiKey + query
@@ -131,6 +131,7 @@ function clearButton() {
 
 function clickChangeTheme() {}
 
+
 // button event listeners
 DOMSelectors.submitButton.addEventListener("click", searchIngredient);
 DOMSelectors.recipeSearched.addEventListener("click", searchRecipes);
@@ -138,14 +139,6 @@ DOMSelectors.clearIngredients.addEventListener("click", clearButton);
 
 getDataIngred(URL);
 
-// "https://api.spoonacular.com/recipes/findByIngredients?apiKey=6ac7239892874905bedcf1b815040b69&ingredients=apples,+flour,+sugar," 
-// add button for more information for ingredients and recipes + change info displayed for insertadjhtml for both
-// https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
-// https://spoonacular.com/food-api/docs#Get-Recipe-Card
-// recipe card: "https://api.spoonacular.com/recipes/{id}/card"
+// maybe fetch data for recipe card to display
 // theme changer
 // css + rubric requirements
-
-// add food jokes
-// support screen readers and seo
-// add filters

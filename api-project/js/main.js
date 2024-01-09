@@ -7,7 +7,7 @@ import "aos/dist/aos.css";
 AOS.init(); // npm install aos --save
 
 const URL =
-  "https://api.spoonacular.com/food/ingredients/search?apiKey=489a1ecfaf764abdbc2e562b8f0b538a&query=apple";
+  "https://api.spoonacular.com/food/ingredients/search?apiKey=3b38e743aa3443eebea0dfc2be4b1354&query=apple";
 const ingredientArr = [];
 
 // get data for ingredients and making variables for ingredient info
@@ -25,13 +25,13 @@ async function getDataIngred(url) {
     console.log(error);
   }
 }
-function createCardI(results) {
-  results.forEach((result) => {
+function createCardI(data) {
+  data.forEach((ingredient) => {
     DOMSelectors.ingredientCard.insertAdjacentHTML(
       "beforeend",
       `<div class = "card" data-aos="fade-right">
-        <div class ="card-head" data-aos="flip-up">${result.name}</div>
-        <img src = "https://spoonacular.com/cdn/ingredients_250x250/${result.image}" class = "card-img" alt="Picture of ${result.name}"/>
+        <div class ="card-head" data-aos="flip-up">${ingredient.name}</div>
+        <img src = "https://spoonacular.com/cdn/ingredients_250x250/${ingredient.image}" class = "card-img" alt="Picture of ${ingredient.name}"/>
         <button type="submit" class="add-button" id="addIngred">Add To Current Ingredients</button> 
         `
     );
@@ -62,17 +62,15 @@ async function getDataRecipe(url) {
       throw new Error(response.statusText);
     } else {
       const data = await response.json();
-      const results = data.results;
-      console.log(results)
-      createCardR(results);
+      createCardR(data);
     }
   } catch (error) {
     console.log(error);
   }
 }
-function createCardR(results) {
-  const recipeCardURL = "https://api.spoonacular.com/recipes/{id}/card?apiKey=489a1ecfaf764abdbc2e562b8f0b538a" // results.url
-  results.forEach((result) => {
+function createCardR(data) {
+  const recipeCardURL = "https://api.spoonacular.com/recipes/{id}/card?apiKey=3b38e743aa3443eebea0dfc2be4b1354" // results.url
+  data.forEach((recipe) => {
     DOMSelectors.ingredientCard.insertAdjacentHTML(
       "beforeend",
       `<div class = "card" data-aos="fade-right">
@@ -93,19 +91,21 @@ function searchIngredient(event) {
   getDataIngred(newURL);
 }
 
-// function for searching for recipes based on ingredient list
+// function for searching for recipes based on ingredient list 
 function searchRecipes() {
-  const recipeURL =
-    "https://api.spoonacular.com/recipes/findByIngredients?apiKey=489a1ecfaf764abdbc2e562b8f0b538a&ingredients=";
+  const apiKey = "3b38e743aa3443eebea0dfc2be4b1354";
+  const baseURL = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=";
+  const query = "&ingredients=";
+  let recipeURL = baseURL + apiKey + query
   for (let i = 0; i < ingredientArr.length; i++) {
-    if ((i = 0)) {
-      recipeURL.concat(ingredientArr[i]);
+
+    if ((i === 0)) {
+      recipeURL += ingredientArr[i];
     } else {
-      recipeURL.concat(",+" + ingredientArr[i]);
+      recipeURL += ",+" + ingredientArr[i];
     }
-  console.log(recipeURL) //maybe fibonacci sequence
-  getDataRecipe(recipeURL);
   }
+  getDataRecipe(recipeURL);
 }
 
 // clears ingredient list
@@ -122,7 +122,7 @@ DOMSelectors.clearIngredients.addEventListener("click", clearButton);
 
 getDataIngred(URL);
 
-// "https://api.spoonacular.com/recipes/findByIngredients?apiKey=489a1ecfaf764abdbc2e562b8f0b538a&ingredients=apples,+flour,+sugar," 
+// "https://api.spoonacular.com/recipes/findByIngredients?apiKey=3b38e743aa3443eebea0dfc2be4b1354&ingredients=apples,+flour,+sugar," 
 // add button for more information for ingredients and recipes + change info displayed for insertadjhtml for both
 // https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
 // https://spoonacular.com/food-api/docs#Get-Recipe-Card

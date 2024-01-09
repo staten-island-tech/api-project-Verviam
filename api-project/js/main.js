@@ -50,7 +50,7 @@ function createCardI(data) {
       "beforeend",
       `<br> - ${ingredientNameText}`
     );
-    const noSpacesIngredient = ingredientNameText.replace(/\s+/g, '-');
+    const noSpacesIngredient = ingredientNameText.replace(/\s+/g, "-");
     ingredientArr.push(noSpacesIngredient);
   }
 }
@@ -71,7 +71,7 @@ async function getDataRecipe(url) {
 }
 function createCardR(data) {
   //results.url
-  DOMSelectors.ingredientCard.innerHTML = ""
+  DOMSelectors.ingredientCard.innerHTML = "";
   data.forEach((recipe) => {
     DOMSelectors.ingredientCard.insertAdjacentHTML(
       "beforeend",
@@ -81,21 +81,20 @@ function createCardR(data) {
         <img src = "${recipe.image}" class = "card-img" alt="Picture of ${recipe.title}"/>
         <button type="submit" class="get-recipe-card" id="getRecipeCard">Click for Recipe Card (click url after redirect)</button> 
         `
-    ); 
-  })
+    );
+  });
   const getRecipeCard = document.querySelectorAll(".get-recipe-card");
   getRecipeCard.forEach((button) => {
-    button.addEventListener("click", openRecipeCard)}
-)
-// function for button that gets recipe card based on id of recipe
-function openRecipeCard(){
-  const card = this.parentElement
-  const cardIDdiv = card.querySelector(".card-id")
-  const cardID = cardIDdiv.textContent;
-  const recipeCardURL = `https://api.spoonacular.com/recipes/${cardID}/card?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef`
-  window.open(recipeCardURL, '_blank')
-} 
-
+    button.addEventListener("click", openRecipeCard);
+  });
+  // function for button that gets recipe card based on id of recipe
+  function openRecipeCard() {
+    const card = this.parentElement;
+    const cardIDdiv = card.querySelector(".card-id");
+    const cardID = cardIDdiv.textContent;
+    const recipeCardURL = `https://api.spoonacular.com/recipes/${cardID}/card?apiKey=f9fb379cedb74dcbb6c758ac6a3c7cef`;
+    window.open(recipeCardURL, "_blank");
+  }
 }
 
 // function for searching for ingredient
@@ -107,15 +106,15 @@ function searchIngredient(event) {
   getDataIngred(newURL);
 }
 
-// function for searching for recipes based on ingredient list 
+// function for searching for recipes based on ingredient list
 function searchRecipes() {
   const apiKey = "f9fb379cedb74dcbb6c758ac6a3c7cef";
-  const baseURL = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=";
+  const baseURL =
+    "https://api.spoonacular.com/recipes/findByIngredients?apiKey=";
   const query = "&ingredients=";
-  let recipeURL = baseURL + apiKey + query
+  let recipeURL = baseURL + apiKey + query;
   for (let i = 0; i < ingredientArr.length; i++) {
-  
-    if ((i === 0)) {
+    if (i === 0) {
       recipeURL += ingredientArr[i];
     } else {
       recipeURL += ",+" + ingredientArr[i];
@@ -128,7 +127,7 @@ function searchRecipes() {
 function clearButton() {
   DOMSelectors.currentIngredients.textContent = "";
   DOMSelectors.ingredientCard.textContent = "";
-  getDataIngred(URL)
+  getDataIngred(URL);
 }
 
 // button event listeners
@@ -139,5 +138,4 @@ DOMSelectors.clearIngredients.addEventListener("click", clearButton);
 getDataIngred(URL);
 
 // maybe fetch data for recipe card to display
-// theme changer
-// css + rubric requirements
+// css 

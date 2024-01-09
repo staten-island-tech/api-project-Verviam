@@ -127,6 +127,8 @@ function searchRecipes() {
 // clears ingredient list
 function clearButton() {
   DOMSelectors.currentIngredients.textContent = "";
+  DOMSelectors.ingredientCard.textContent = "";
+  getDataIngred(URL)
 }
 
 // button event listeners

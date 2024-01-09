@@ -7,7 +7,7 @@ import "aos/dist/aos.css";
 AOS.init(); // npm install aos --save
 
 const URL =
-  "https://api.spoonacular.com/food/ingredients/search?apiKey=3b38e743aa3443eebea0dfc2be4b1354&query=apple";
+  "https://api.spoonacular.com/food/ingredients/search?apiKey=6ac7239892874905bedcf1b815040b69&query=apple";
 const ingredientArr = [];
 
 // get data for ingredients and making variables for ingredient info
@@ -50,7 +50,8 @@ function createCardI(data) {
       "beforeend",
       `<br> - ${ingredientNameText}`
     );
-    ingredientArr.push(ingredientNameText);
+    const noSpacesIngredient = ingredientNameText.replace(/\s+/g, '-');
+    ingredientArr.push(noSpacesIngredient);
   }
 }
 
@@ -69,18 +70,23 @@ async function getDataRecipe(url) {
   }
 }
 function createCardR(data) {
-  const recipeCardURL = "https://api.spoonacular.com/recipes/{id}/card?apiKey=3b38e743aa3443eebea0dfc2be4b1354" // results.url
+  //results.url
+  DOMSelectors.ingredientCard.innerHTML = ""
   data.forEach((recipe) => {
+
     DOMSelectors.ingredientCard.insertAdjacentHTML(
       "beforeend",
       `<div class = "card" data-aos="fade-right">
-        <div class ="card-head" data-aos="flip-up">${result.name}</div>
-        <img src = "https://spoonacular.com/cdn/ingredients_250x250/${result.image}" class = "card-img" alt="Picture of ${result.name}"/>
-        <button type="submit" class="add-button" id="addIngred">Add To Current Ingredients</button> 
+        <div class ="card-head" data-aos="flip-up">${recipe.title}</div>
+        <img src = "${recipe.image}" class = "card-img" alt="Picture of ${recipe.title}"/>
+        <button type="submit" onclick="openRecipeCard(${recipe.id})" class="get-recipe-card" id="getRecipeCard">Click for Recipe Card</button> 
         `
-    );
-  });
-}
+    ); 
+  }
+)}   
+function openRecipeCard(recipeID){
+  const recipeCardURL = "https://api.spoonacular.com/recipes/${recipeID}/card?apiKey=6ac7239892874905bedcf1b815040b69"
+} 
 
 // function for searching for ingredient
 function searchIngredient(event) {
@@ -93,24 +99,25 @@ function searchIngredient(event) {
 
 // function for searching for recipes based on ingredient list 
 function searchRecipes() {
-  const apiKey = "3b38e743aa3443eebea0dfc2be4b1354";
+  const apiKey = "6ac7239892874905bedcf1b815040b69";
   const baseURL = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=";
   const query = "&ingredients=";
   let recipeURL = baseURL + apiKey + query
   for (let i = 0; i < ingredientArr.length; i++) {
-
+  
     if ((i === 0)) {
       recipeURL += ingredientArr[i];
     } else {
       recipeURL += ",+" + ingredientArr[i];
     }
   }
+  console.log(recipeURL)
   getDataRecipe(recipeURL);
 }
 
 // clears ingredient list
 function clearButton() {
-  DOMSelectors.currentIngredients.innerHTML = "";
+  DOMSelectors.currentIngredients.textContent = "";
 }
 
 function clickChangeTheme() {}
@@ -122,7 +129,7 @@ DOMSelectors.clearIngredients.addEventListener("click", clearButton);
 
 getDataIngred(URL);
 
-// "https://api.spoonacular.com/recipes/findByIngredients?apiKey=3b38e743aa3443eebea0dfc2be4b1354&ingredients=apples,+flour,+sugar," 
+// "https://api.spoonacular.com/recipes/findByIngredients?apiKey=6ac7239892874905bedcf1b815040b69&ingredients=apples,+flour,+sugar," 
 // add button for more information for ingredients and recipes + change info displayed for insertadjhtml for both
 // https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients
 // https://spoonacular.com/food-api/docs#Get-Recipe-Card

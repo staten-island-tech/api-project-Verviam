@@ -4,7 +4,7 @@ const DOMSelectors = {
     ingredientCard: document.querySelector(".cards"),
     currentIngredients: document.getElementById("ingredients-text"),
     recipeSearched: document.getElementById("findRecipe"),
-    clearIngredients: document.getElementById("clearIngred")
+    clearIngredients: document.getElementById("clearIngred"),
 }
 
 export {DOMSelectors}

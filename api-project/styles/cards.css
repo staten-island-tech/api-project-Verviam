@@ -3,7 +3,8 @@
     padding: 1rem;
     height: 65vh;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
   
 .card{

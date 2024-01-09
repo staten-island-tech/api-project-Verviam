@@ -129,9 +129,6 @@ function clearButton() {
   DOMSelectors.currentIngredients.textContent = "";
 }
 
-function clickChangeTheme() {}
-
-
 // button event listeners
 DOMSelectors.submitButton.addEventListener("click", searchIngredient);
 DOMSelectors.recipeSearched.addEventListener("click", searchRecipes);

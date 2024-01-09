@@ -73,20 +73,30 @@ function createCardR(data) {
   //results.url
   DOMSelectors.ingredientCard.innerHTML = ""
   data.forEach((recipe) => {
-
     DOMSelectors.ingredientCard.insertAdjacentHTML(
       "beforeend",
       `<div class = "card" data-aos="fade-right">
         <div class ="card-head" data-aos="flip-up">${recipe.title}</div>
+        <div class ="card-id" data-aos="flip-up">${recipe.id}</div>
         <img src = "${recipe.image}" class = "card-img" alt="Picture of ${recipe.title}"/>
-        <button type="submit" onclick="openRecipeCard(${recipe.id})" class="get-recipe-card" id="getRecipeCard">Click for Recipe Card</button> 
+        <button type="submit" class="get-recipe-card" id="getRecipeCard">Click for Recipe Card</button> 
         `
     ); 
-  }
-)}   
-function openRecipeCard(recipeID){
-  const recipeCardURL = "https://api.spoonacular.com/recipes/${recipeID}/card?apiKey=6ac7239892874905bedcf1b815040b69"
+  })
+  const getRecipeCard = document.querySelectorAll(".get-recipe-card");
+  getRecipeCard.forEach((button) => {
+    button.addEventListener("click", openRecipeCard)}
+)
+// function for button that gets recipe card based on id of recipe
+function openRecipeCard(){
+  const card = this.parentElement
+  const cardIDdiv = card.querySelector(".card-id")
+  const cardID = cardIDdiv.textContent;
+  const recipeCardURL = `https://api.spoonacular.com/recipes/${cardID}/card?apiKey=6ac7239892874905bedcf1b815040b69`
+  window.open(recipeCardURL, '_blank')
 } 
+
+}
 
 // function for searching for ingredient
 function searchIngredient(event) {
@@ -111,7 +121,6 @@ function searchRecipes() {
       recipeURL += ",+" + ingredientArr[i];
     }
   }
-  console.log(recipeURL)
   getDataRecipe(recipeURL);
 }
 
